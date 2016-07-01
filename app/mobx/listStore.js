@@ -1,25 +1,30 @@
 import {observable} from 'mobx'
 
+let index = 0
+
 class ObservableListStore {
   @observable list = []
 
   addListItem (item) {
     this.list.push({
       name: item, 
-      items: []
+      items: [],
+      index
     })
+    index++
   }
 
   removeListItem (item) {
+    console.log('item:::', item)
     this.list = this.list.filter((l) => {
-      return l.name !== item.name
+      return l.index !== item.index
     })
   }
 
-  addItem(name, item) {
+  addItem(item, name) {
     this.list.forEach((l) => {
-      if (l.name === name) {
-        l.items.push(item)
+      if (l.index === item.index) {
+        l.items.push(name)
       }
     })
   }

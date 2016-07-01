@@ -10,7 +10,7 @@ class NewItem extends Component {
   }
   addItem () {
     if (this.state.newItem === '') return
-    this.props.store.addItem(this.props.item.name, this.state.newItem)
+    this.props.store.addItem(this.props.item, this.state.newItem)
     this.setState({
       newItem: ''
     })

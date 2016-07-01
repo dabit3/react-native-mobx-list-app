@@ -33,8 +33,7 @@ class ReactNativeMobX extends Component {
           passProps: {
             store: ListStore
           }
-        }}
-        />
+        }} />
     )
   }
 }
