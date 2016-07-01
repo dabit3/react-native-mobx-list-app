@@ -4,7 +4,7 @@ import {observer} from 'mobx-react/native'
 import NewItem from './NewItem'
 
 @observer
-class TodoList extends React.Component {
+class TodoList extends Component {
   constructor () {
     super()
     this.state = {
@@ -13,9 +13,7 @@ class TodoList extends React.Component {
     }
   }
   toggleInput () {
-    this.setState({
-      showInput: !this.state.showInput
-    })
+    this.setState({ showInput: !this.state.showInput })
   }
   addListItem () {
     this.props.store.addListItem(this.state.text)
