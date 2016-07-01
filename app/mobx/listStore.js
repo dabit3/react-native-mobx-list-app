@@ -1,5 +1,4 @@
 import {observable} from 'mobx'
-import mobx from 'mobx'
 import React from 'react'
 import { Text } from 'react-native'
 
