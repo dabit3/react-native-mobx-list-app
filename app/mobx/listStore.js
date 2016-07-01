@@ -1,6 +1,4 @@
 import {observable} from 'mobx'
-import React from 'react'
-import { Text } from 'react-native'
 
 class ObservableListStore {
   @observable list = []
