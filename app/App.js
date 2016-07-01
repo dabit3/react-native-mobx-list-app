@@ -87,27 +87,6 @@ const NoList = () => (
   </View>
 )
 
-// @observer
-// class TodoView extends React.Component {
-//   render() {
-//     const item = this.props.item
-//     console.log('item::', item)
-//     return (
-//       <View />
-//     ); 
-//   }
-
-//   onToggleCompleted = () => {
-//     const todo = this.props.todo;
-//     todo.completed = !todo.completed;
-//   }
-
-//   onRename = () => {
-//     const todo = this.props.todo;
-//     todo.task = prompt('Task name', todo.task) || todo.task; 
-//   } 
-// }
-
 const styles = StyleSheet.create({
   itemContainer: {
     borderBottomWidth: 1,
