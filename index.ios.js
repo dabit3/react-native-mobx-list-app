@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react'
 import App from './app/App'
 import ListStore from './app/mobx/listStore'
@@ -38,4 +32,4 @@ class ReactNativeMobX extends Component {
   }
 }
 
-AppRegistry.registerComponent('ReactNativeMobX', () => ReactNativeMobX)
+AppRegistry.registerComponent('mobx2', () => ReactNativeMobX)

@@ -1,52 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, { Component } from 'react'
+import App from './app/App'
+import ListStore from './app/mobx/listStore'
 
-import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+  Navigator
+} from 'react-native'
 
 class ReactNativeMobX extends Component {
-  render() {
+  renderScene (route, navigator) {
+    return <route.component {...route.passProps} navigator={navigator} />
+  }
+  configureScene (route, routeStack) {
+    if (route.type === 'Modal') {
+      return Navigator.SceneConfigs.FloatFromBottom
+    }
+    return Navigator.SceneConfigs.PushFromRight
+  }
+  render () {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
+      <Navigator
+        configureScene={this.configureScene.bind(this)}
+        renderScene={this.renderScene.bind(this)}
+        initialRoute={{
+          component: App,
+          passProps: {
+            store: ListStore
+          }
+        }} />
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('ReactNativeMobX', () => ReactNativeMobX);
+AppRegistry.registerComponent('mobx2', () => ReactNativeMobX)
