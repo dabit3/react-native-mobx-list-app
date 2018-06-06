@@ -7,7 +7,7 @@
 1 Clone the repo:
 
 ```
-git clone git@github.com:dabit3/react-native-mobx-list-app.git
+git clone https://github.com/dabit3/react-native-mobx-list-app
 ```
 
 2 cd into directory and install dependencies
