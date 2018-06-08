@@ -1,36 +1,33 @@
-import {observable} from 'mobx'
+import { observable } from 'mobx';
 
-let index = 0
+let index = 0;
 
 class ObservableListStore {
-  @observable list = []
+  @observable list = [];
 
-  addListItem (item) {
+  addListItem(item) {
     this.list.push({
-      name: item, 
+      name: item,
       items: [],
       index
-    })
-    index++
+    });
+    index++;
   }
 
-  removeListItem (item) {
-    console.log('item:::', item)
+  removeListItem(item) {
     this.list = this.list.filter((l) => {
-      return l.index !== item.index
-    })
+      return l.index !== item.index;
+    });
   }
 
   addItem(item, name) {
     this.list.forEach((l) => {
       if (l.index === item.index) {
-        l.items.push(name)
+        l.items.push(name);
       }
-    })
+    });
   }
 }
 
-
-const observableListStore = new ObservableListStore()
-export default observableListStore
-                        
+const observableListStore = new ObservableListStore();
+export default observableListStore;

@@ -1,50 +1,52 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 
 class NewItem extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       newItem: ''
-    }
+    };
   }
-  addItem () {
-    if (this.state.newItem === '') return
-    this.props.store.addItem(this.props.item, this.state.newItem)
+
+  addItem() {
+    if (this.state.newItem === '') return;
+    this.props.store.addItem(this.props.item, this.state.newItem);
     this.setState({
       newItem: ''
-    })
+    });
   }
-  updateNewItem (text) {
+
+  updateNewItem(text) {
     this.setState({
       newItem: text
-    })
+    });
   }
-  render () {
-    const { item } = this.props
+
+  render() {
+    const { item } = this.props;
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <View style={styles.heading}>
           <Text style={styles.headingText}>{item.name}</Text>
-          <Text
-            onPress={this.props.navigator.pop}
-            style={styles.closeButton}>&times;</Text>
+          <Text onPress={this.props.navigator.pop} style={styles.closeButton}>
+            &times;
+          </Text>
         </View>
         {!item.items.length && <NoItems />}
         {item.items.length ? <Items items={item.items} /> : <View />}
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <TextInput
             value={this.state.newItem}
             onChangeText={(text) => this.updateNewItem(text)}
-            style={styles.input} />
-          <TouchableHighlight
-            onPress={this.addItem.bind(this)}
-            style={styles.button}>
+            style={styles.input}
+          />
+          <TouchableHighlight onPress={this.addItem.bind(this)} style={styles.button}>
             <Text>Add</Text>
           </TouchableHighlight>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -52,15 +54,19 @@ const NoItems = () => (
   <View style={styles.noItem}>
     <Text style={styles.noItemText}>No Items, Add Items To Get Started</Text>
   </View>
-)
-const Items = ({items}) => (
-  <View style={{flex: 1, paddingTop: 10}}>
-   {items.map((item, i) => {
-        return <Text style={styles.item} key={i}>• {item}</Text>
-      })
-    }
+);
+
+const Items = ({ items }) => (
+  <View style={{ flex: 1, paddingTop: 10 }}>
+    {items.map((item, i) => {
+      return (
+        <Text style={styles.item} key={i}>
+          • {item}
+        </Text>
+      );
+    })}
   </View>
-)
+);
 
 const styles = StyleSheet.create({
   heading: {
@@ -109,6 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 20
   }
-})
+});
 
-export default NewItem
+export default NewItem;

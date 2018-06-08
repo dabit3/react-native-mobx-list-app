@@ -1,34 +1,39 @@
-import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableHighlight, StyleSheet } from 'react-native'
-import {observer} from 'mobx-react/native'
-import NewItem from './NewItem'
+import React, { Component } from 'react';
+import { View, Text, TextInput, TouchableHighlight, StyleSheet } from 'react-native';
+import { observer } from 'mobx-react/native';
+import NewItem from './NewItem';
 
 @observer
 class TodoList extends Component {
-  constructor () {
-    super()
+  constructor() {
+    super();
     this.state = {
       text: '',
       showInput: false
-    }
+    };
   }
-  toggleInput () {
-    this.setState({ showInput: !this.state.showInput })
+
+  toggleInput() {
+    this.setState({ showInput: !this.state.showInput });
   }
-  addListItem () {
-    this.props.store.addListItem(this.state.text)
+
+  addListItem() {
+    this.props.store.addListItem(this.state.text);
     this.setState({
       text: '',
       showInput: !this.state.showInput
-    })
+    });
   }
-  removeListItem (item) {
-    this.props.store.removeListItem(item)
+
+  removeListItem(item) {
+    this.props.store.removeListItem(item);
   }
-  updateText (text) {
-    this.setState({text})
+
+  updateText(text) {
+    this.setState({ text });
   }
-  addItemToList (item) {
+
+  addItemToList(item) {
     this.props.navigator.push({
       component: NewItem,
       type: 'Modal',
@@ -36,44 +41,43 @@ class TodoList extends Component {
         item,
         store: this.props.store
       }
-    })
+    });
   }
+
   render() {
-    const { showInput } = this.state
-    const { list } = this.props.store
+    const { showInput } = this.state;
+    const { list } = this.props.store;
     return (
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <View style={styles.heading}>
           <Text style={styles.headingText}>My List App</Text>
         </View>
         {!list.length ? <NoList /> : null}
-        <View style={{flex:1}}>
+        <View style={{ flex: 1 }}>
           {list.map((l, i) => {
-            return <View key={i} style={styles.itemContainer}>
-              <Text
-                style={styles.item}
-                onPress={this.addItemToList.bind(this, l)}>{l.name.toUpperCase()}</Text>
-              <Text
-                style={styles.deleteItem}
-                onPress={this.removeListItem.bind(this, l)}>Remove</Text>
-            </View>
+            return (
+              <View key={i} style={styles.itemContainer}>
+                <Text style={styles.item} onPress={this.addItemToList.bind(this, l)}>
+                  {l.name.toUpperCase()}
+                </Text>
+                <Text style={styles.deleteItem} onPress={this.removeListItem.bind(this, l)}>
+                  Remove
+                </Text>
+              </View>
+            );
           })}
         </View>
         <TouchableHighlight
-          underlayColor='transparent'
-          onPress={
-            this.state.text === '' ? this.toggleInput.bind(this)
-            : this.addListItem.bind(this, this.state.text)
-          }
-          style={styles.button}>
+          underlayColor="transparent"
+          onPress={this.state.text === '' ? this.toggleInput.bind(this) : this.addListItem.bind(this, this.state.text)}
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>
             {this.state.text === '' && '+ New List'}
             {this.state.text !== '' && '+ Add New List Item'}
           </Text>
         </TouchableHighlight>
-        {showInput && <TextInput
-          style={styles.input}
-          onChangeText={(text) => this.updateText(text)} />}
+        {showInput && <TextInput style={styles.input} onChangeText={(text) => this.updateText(text)} />}
       </View>
     );
   }
@@ -83,7 +87,7 @@ const NoList = () => (
   <View style={styles.noList}>
     <Text style={styles.noListText}>No List, Add List To Get Started</Text>
   </View>
-)
+);
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -140,7 +144,7 @@ const styles = StyleSheet.create({
   noListText: {
     fontSize: 22,
     color: '#156e9a'
-  },
-})
+  }
+});
 
-export default TodoList
+export default TodoList;
